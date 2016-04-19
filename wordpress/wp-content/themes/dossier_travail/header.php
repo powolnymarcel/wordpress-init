@@ -25,9 +25,13 @@ $favicon = IMAGES. '/icons/favicon.ico';
 $touchicon = IMAGES. '/icons/apple-touch-icon-precomposed.png';
 ?>
 
+    <link rel="shortcut icon" href="<?php echo $favicon; ?>">
+    <link rel="apple-touch-icon-precomposed" href="<?php echo $touchicon; ?>" sizes="152x152">
+
+
 <?php wp_head(); ?>
 </head>
-<body>
+<body <?php body_class(); ?>>
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -38,23 +42,27 @@ $touchicon = IMAGES. '/icons/apple-touch-icon-precomposed.png';
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
+                <span class="sr-only"><?php _e('Toggle navigation','tuts') ?></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">
-                Ice Breaker
+            <a class="navbar-brand" href="<?php echo esc_url(home_url('/')) ?>">
+                <?php bloginfo('name') ?>
             </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
+            <?php
+            wp_nav_menu(array(
+                'menu_class'=>'nav navbar-nav navbar-right',
+                'theme_location'=>'main-menu',
+                'container'=>false
+
+            ))
+            ?>
+
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>

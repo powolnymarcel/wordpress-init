@@ -18,4 +18,26 @@ define('IMAGES',THEMEROOT.'/img');
 define('JS',THEMEROOT.'/js');
 
 
-?>
+
+/*
+*
+*2. Config du theme
+*
+*/
+
+if (! function_exists('theme_setup')){
+    function theme_setup()
+    {
+        $lang_dir= THEMEROOT.'/languages';
+        load_theme_textdomain('wordpress-theme',$lang_dir);
+
+        add_theme_support('automatic-feed-links');
+        add_theme_support('post-thumbnails');
+
+        register_nav_menus(array(
+           'main-menu'=>__('Menu principal','wordpress-theme'),
+        ));
+    }
+
+    add_action('after_setup_theme','theme_setup');
+}
